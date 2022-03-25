@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-12">
+    <h1 align="center">Update ranks</h1>
+  </div>
+  <div class="col-6 offset-3">
+    <%
+=begin%>
+ <%= form_with(model: @member) do |form| %> 
+<%
+=end%>
+
+    <%= form_with model: @member, url: rank_update_path(@member.id), method: :patch, local: true, scope: :rank_update do |form| %>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= form.label :player %>
+              <%= form.text_field :email,{ class: 'form-control', readonly: true} %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= form.label :Score %>
+              <%= form.select(:score, ['Win','Draw','Loose'], {include_blank: 'Select a score'}, { :class => 'form-control', required: true }) %>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <%= form.label :Against %>
+              <%= form.collection_select :member_id, Member.where("id != ?", @member.id), :id, :email,{include_blank: 'Select a player'},{ class: 'form-control', required: true} %>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <%= form.submit 'Submit', class: 'btn btn-primary' %>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

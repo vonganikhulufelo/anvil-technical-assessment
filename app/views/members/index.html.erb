@@ -1,0 +1,38 @@
+
+<div class="row">
+  <div class="col-12">
+    <h1 align="center">Leader board</h1>
+  </div>
+  <div class="col-12">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Surname</th>
+          <th>Email</th>
+          <th>Birthday</th>
+          <th>Games </th>
+          <th>Current rank </th>
+          <th colspan="4"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @members.each do |member| %>
+          <tr>
+            <td><%= member.name %></td>
+            <td><%= member.surname %></td>
+            <td><%= member.email %></td>
+            <td><%= member.birthday.strftime("%d/%m/%Y") %></td>
+            <td><%= member.games_played %></td>
+            <td><%= member.rank %></td>
+            <td><%= link_to 'Rank', rank_path(member.id), class: 'btn btn-primary' %></td>
+            <td><%= link_to 'Show', member, class: 'btn btn-success' %></td>
+            <td><%= link_to 'Edit', edit_member_path(member), class: 'btn btn-info' %></td>
+            <td><%= link_to 'Destroy', member, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  </div>

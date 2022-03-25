@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-12">
+    <h1 align="center">New member</h1>
+  </div>
+  <div class="col-6 offset-3">
+    <%= form_with(model: @member) do |form| %>
+      <% if @member.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+          <ul>
+            <% @member.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="form-group">
+        <%= form.label :name %>
+        <%= form.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label :surname %>
+        <%= form.text_field :surname, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label :email %>
+        <%= form.text_field :email, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.label :birthday %>
+        <%= form.date_field :birthday, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= form.submit 'Submit', class: 'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
