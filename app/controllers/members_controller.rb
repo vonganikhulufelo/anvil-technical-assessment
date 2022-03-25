@@ -90,22 +90,22 @@ class MembersController < ApplicationController
 
           else
             
-            @rank = ((@player.rank.to_i - @opponent.rank.to_i) / 2)
+            @rank = ((@opponent.rank.to_i - @player.rank.to_i) / 2)
 
-            @below_player_rank  = Member.find_by(rank: (@opponent.rank.to_i + 1)).update(rank: @opponent.rank.to_i);
-            @opponent.update(rank: @opponent.rank.to_i + 1 )
+            @below_player_rank  = Member.find_by(rank: (@player.rank.to_i + 1)).update(rank: @player.rank.to_i);
+            @player.update(rank: @player.rank.to_i + 1 )
             
 
-            @members_below_oppenent  = Member.where("rank > ? AND id != ?", @player.rank,@player.id)
+            @members_below_oppenent  = Member.where("rank > ? AND id != ?", @opponent.rank,@opponent.id)
             @members_below_oppenent.each do |m|
               m.update(rank: m.rank.to_i - 1)
             end
 
             
-            @player.update(rank: @player.rank.to_i - @rank.to_i)
+            @opponent.update(rank: @opponent.rank.to_i - @rank.to_i)
 
-            @check_curent_move = Member.find(@player.id)
-            @members_above_oppenent  = Member.where("rank >= ? AND id != ?", @check_curent_move.rank,@player.id)
+            @check_curent_move = Member.find(@opponent.id)
+            @members_above_oppenent  = Member.where("rank >= ? AND id != ?", @check_curent_move.rank,@opponent.id)
             @members_above_oppenent.each do |m|
               m.update(rank: m.rank.to_i + 1)
             end
